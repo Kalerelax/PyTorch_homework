@@ -7,14 +7,14 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 </pre>
-# 数值运算和绘图的程序包
+#数值运算和绘图的程序包
 <pre>
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 from matplotlib.font_manager import *
 </pre>
-# 加载机器学习的软件包，主要为了词向量的二维可视化
+#加载机器学习的软件包，主要为了词向量的二维可视化
 <pre>
 from sklearn.decomposition import PCA
 </pre>
@@ -35,14 +35,14 @@ import re
 </pre>
 # 二.加载中文词向量，下载地址为：链接：http://pan.baidu.com/s/1gePQAun 密码：kvtg
 
-# 该中文词向量库是由尹相志提供，训练语料来源为：微博、人民日报、上海热线、汽车之家等，包含1366130个词向量
+#该中文词向量库是由尹相志提供，训练语料来源为：微博、人民日报、上海热线、汽车之家等，包含1366130个词向量
 <pre>
 word_vectors = KeyedVectors.load_word2vec_format('vectors.bin', binary=True, unicode_errors='ignore')
 len(word_vectors.vocab)
 </pre>
-# 加载中文的词向量，下载地址为：http://nlp.stanford.edu/data/glove.6B.zip，解压后将glove.6B.100d.txt文件拷贝到与本notebook
+#加载中文的词向量，下载地址为：http://nlp.stanford.edu/data/glove.6B.zip，解压后将glove.6B.100d.txt文件拷贝到与本notebook
 
-# 文件一致的文件夹里面。
+#文件一致的文件夹里面。
 <pre>
 f = open('glove.6B.100d.txt', 'r')
 i = 1
@@ -58,28 +58,29 @@ with open('glove.6B.100d.txt') as f:
         word_vectors_en[word] = vectors
         i += 1
 print(len(word_vectors_en))
-#三.可视化。中文的一二三四五列表
+
+# 三可视化。中文的一二三四五列表
 cn_list = {'一', '二', '三', '四', '五', '六', '七', '八', '九', '零'}
-# 阿拉伯数字的12345列表
+#阿拉伯数字的12345列表
 #en_list = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}
-# 英文数字的列表
+#英文数字的列表
 en_list = {'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'zero'}
-# 对应词向量都存入到列表中
+#对应词向量都存入到列表中
 cn_vectors = []  #中文的词向量列表
 en_vectors = []  #英文的词向量列表
 for w in cn_list:
     cn_vectors.append(word_vectors[w])
 for w in en_list:
     en_vectors.append(word_vectors_en[w])
-# 将这些词向量统一转化为矩阵
+#将这些词向量统一转化为矩阵
 cn_vectors = np.array(cn_vectors)
 en_vectors = np.array(en_vectors)
-# 降维实现可视化
+#降维实现可视化
 X_reduced = PCA(n_components=2).fit_transform(cn_vectors)
 Y_reduced = PCA(n_components = 2).fit_transform(en_vectors)
 #plt.rcParams['font.sans-serif']=['Droid Sans Fallback']
 </pre>
-# 绘制所有单词向量的二维空间投影
+#绘制所有单词向量的二维空间投影
 <pre>
 f, (ax1, ax2) = plt.subplots(1, 2, figsize = (10, 8))
 ax1.plot(X_reduced[:, 0], X_reduced[:, 1], 'o')
