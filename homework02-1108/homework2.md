@@ -95,7 +95,31 @@ print(result)
 </pre>
 #用line_index来保存姓氏的索引
 <pre>
+import random
 
+def random_training_pair():   
+    #随机选择一种语言
+    category = random.choice(all_categories)
+    #从语言中随机选择一个姓氏
+    line = random.choice(category_lines[category])
+    #我们将姓氏和语言都转化为索引
+    category_index = all_categories.index(category)
+    
+    line_index = []
+    #你需要把 line 中字母的索引加入到line_index 中
+    #Todo:
+    for item in line:
+        list=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+             'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V',
+              'W','X','Y','Z']#," ",".",",",";","'"
+        line_index.append(list.index(item))
+    return category, line, category_index, line_index
+
+#测试一下上面的函数方法
+for i in range(5):
+    category, line, category_index, line_index = random_training_pair()
+    print('category =', category, '/ line =', line)
+    print('category =', category_index, '/ line =', line_index)
 category = Czech / line = Mojjis
 category = 13 / line = [38, 14, 9, 9, 8, 18]
 category = Korean / line = Lim
