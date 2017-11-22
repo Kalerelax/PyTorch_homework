@@ -47,7 +47,7 @@ len(word_vectors.vocab)
 f = open('glove.6B.100d.txt', 'r')
 i = 1
 </pre>
-# 将英文的词向量都存入如下的字典中
+#将英文的词向量都存入如下的字典中
 <pre>
 word_vectors_en = {}
 with open('glove.6B.100d.txt') as f:
@@ -59,7 +59,7 @@ with open('glove.6B.100d.txt') as f:
         i += 1
 print(len(word_vectors_en))
 
-# 三可视化。中文的一二三四五列表
+# 三 可视化。中文的一二三四五列表
 cn_list = {'一', '二', '三', '四', '五', '六', '七', '八', '九', '零'}
 #阿拉伯数字的12345列表
 #en_list = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}
@@ -90,7 +90,7 @@ for i, w in enumerate(cn_list):
     ax1.text(X_reduced[i, 0], X_reduced[i, 1], w, fontproperties = zhfont1, alpha = 1)
 for i, w in enumerate(en_list):
     ax2.text(Y_reduced[i, 0], Y_reduced[i, 1], w, alpha = 1)  
-![](链接1)
+![](http://upload-images.jianshu.io/upload_images/7539367-75f9223e86201eff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 # 中文的科目列表
 cn_list = {'物理', '化学', '生物', '科学', '社会', '计算机', '历史'}
 # 阿拉伯数字的12345列表
@@ -120,7 +120,7 @@ for i, w in enumerate(cn_list):
     ax1.text(X_reduced[i, 0], X_reduced[i, 1], w, fontproperties = zhfont1, alpha = 1)
 for i, w in enumerate(en_list):
     ax2.text(Y_reduced[i, 0], Y_reduced[i, 1], w, alpha = 1)
-![](链接2)
+![](http://upload-images.jianshu.io/upload_images/7539367-ddddce6ba4bca763.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 </pre>
 
 # 四.训练一个神经网络用于机器翻译
@@ -177,6 +177,7 @@ num_epoch =40
 
 
 #开始训练500次，每次对所有的数据都做循环
+<pre>
 results = []
 for epoch in range(num_epoch):
     train_loss = []
@@ -255,10 +256,10 @@ plt.xlabel('Epoch')
 plt.ylabel('Loss Function')
 plt.show()
 </pre>
-<链接3>
+![](http://upload-images.jianshu.io/upload_images/7539367-0f6aed836362587f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-# 在测试集上验证准确度
-# 检验标准有两个：一个是直接用预测的词和标准答案做全词匹配；另一个是做单字的匹配
+#在测试集上验证准确度
+#检验标准有两个：一个是直接用预测的词和标准答案做全词匹配；另一个是做单字的匹配
 <pre>
 exact_same = 0  #全词匹配数量
 one_same = 0 #单字匹配数量
