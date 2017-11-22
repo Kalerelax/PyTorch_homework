@@ -1,42 +1,54 @@
 # 一. 加载必要的程序包
 # PyTorch的程序包
+<pre>
 import torch
 from torch.autograd import Variable
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-
+</pre>
 # 数值运算和绘图的程序包
+<pre>
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 from matplotlib.font_manager import *
-
+</pre>
 # 加载机器学习的软件包，主要为了词向量的二维可视化
+<pre>
 from sklearn.decomposition import PCA
-
+</pre>
 #加载Word2Vec的软件包
+<pre>
 import gensim as gensim
 from gensim.models import Word2Vec
 from gensim.models.keyedvectors import KeyedVectors
 from gensim.models.word2vec import LineSentence
-
+</pre>
 #加载正则表达式处理的包
+<pre>
 import re
-
+</pre>
 #在Notebook界面能够直接显示图形
+<pre>
 %matplotlib inline
-
+</pre>
 # 二.加载中文词向量，下载地址为：链接：http://pan.baidu.com/s/1gePQAun 密码：kvtg
+
 # 该中文词向量库是由尹相志提供，训练语料来源为：微博、人民日报、上海热线、汽车之家等，包含1366130个词向量
+<pre>
 word_vectors = KeyedVectors.load_word2vec_format('vectors.bin', binary=True, unicode_errors='ignore')
 len(word_vectors.vocab)
+</pre>
 # 加载中文的词向量，下载地址为：http://nlp.stanford.edu/data/glove.6B.zip，解压后将glove.6B.100d.txt文件拷贝到与本notebook
+
 # 文件一致的文件夹里面。
+<pre>
 f = open('glove.6B.100d.txt', 'r')
 i = 1
-
+</pre>
 # 将英文的词向量都存入如下的字典中
+<pre>
 word_vectors_en = {}
 with open('glove.6B.100d.txt') as f:
     for line in f:
@@ -46,14 +58,12 @@ with open('glove.6B.100d.txt') as f:
         word_vectors_en[word] = vectors
         i += 1
 print(len(word_vectors_en))
-
 #三.可视化。中文的一二三四五列表
 cn_list = {'一', '二', '三', '四', '五', '六', '七', '八', '九', '零'}
 # 阿拉伯数字的12345列表
 #en_list = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}
 # 英文数字的列表
 en_list = {'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'zero'}
-
 # 对应词向量都存入到列表中
 cn_vectors = []  #中文的词向量列表
 en_vectors = []  #英文的词向量列表
@@ -61,17 +71,16 @@ for w in cn_list:
     cn_vectors.append(word_vectors[w])
 for w in en_list:
     en_vectors.append(word_vectors_en[w])
-
 # 将这些词向量统一转化为矩阵
 cn_vectors = np.array(cn_vectors)
 en_vectors = np.array(en_vectors)
-
 # 降维实现可视化
 X_reduced = PCA(n_components=2).fit_transform(cn_vectors)
 Y_reduced = PCA(n_components = 2).fit_transform(en_vectors)
 #plt.rcParams['font.sans-serif']=['Droid Sans Fallback']
-
+</pre>
 # 绘制所有单词向量的二维空间投影
+<pre>
 f, (ax1, ax2) = plt.subplots(1, 2, figsize = (10, 8))
 ax1.plot(X_reduced[:, 0], X_reduced[:, 1], 'o')
 ax2.plot(Y_reduced[:, 0], Y_reduced[:, 1], 'o')
@@ -79,16 +88,14 @@ zhfont1 = matplotlib.font_manager.FontProperties(fname='/usr/share/fonts/truetyp
 for i, w in enumerate(cn_list):
     ax1.text(X_reduced[i, 0], X_reduced[i, 1], w, fontproperties = zhfont1, alpha = 1)
 for i, w in enumerate(en_list):
-    ax2.text(Y_reduced[i, 0], Y_reduced[i, 1], w, alpha = 1)
-<http://thumbsnap.com/Dxe5OANj>
-
+    ax2.text(Y_reduced[i, 0], Y_reduced[i, 1], w, alpha = 1)  
+![](http://upload-images.jianshu.io/upload_images/7539367-514b6aa6cae3fdb3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 # 中文的科目列表
 cn_list = {'物理', '化学', '生物', '科学', '社会', '计算机', '历史'}
 # 阿拉伯数字的12345列表
 #en_list = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}
 # 英文科目的列表
 en_list = {'physics', 'chemistry', 'biology', 'science', 'society', 'computer', 'history'}
-
 # 对应词向量都存入到列表中
 cn_vectors = []  #中文的词向量列表
 en_vectors = []  #英文的词向量列表
@@ -96,7 +103,6 @@ for w in cn_list:
     cn_vectors.append(word_vectors[w])
 for w in en_list:
     en_vectors.append(word_vectors_en[w])
-
 # 将这些词向量统一转化为矩阵
 cn_vectors = np.array(cn_vectors)
 en_vectors = np.array(en_vectors)
@@ -104,7 +110,6 @@ en_vectors = np.array(en_vectors)
 X_reduced = PCA(n_components=2).fit_transform(cn_vectors)
 Y_reduced = PCA(n_components = 2).fit_transform(en_vectors)
 #plt.rcParams['font.sans-serif']=['Droid Sans Fallback']
-
 # 绘制所有单词向量的二维空间投影
 f, (ax1, ax2) = plt.subplots(1, 2, figsize = (10, 8))
 ax1.plot(X_reduced[:, 0], X_reduced[:, 1], 'o')
@@ -114,10 +119,11 @@ for i, w in enumerate(cn_list):
     ax1.text(X_reduced[i, 0], X_reduced[i, 1], w, fontproperties = zhfont1, alpha = 1)
 for i, w in enumerate(en_list):
     ax2.text(Y_reduced[i, 0], Y_reduced[i, 1], w, alpha = 1)
+![](http://upload-images.jianshu.io/upload_images/7539367-514b6aa6cae3fdb3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+</pre>
 
-<http://thumbsnap.com/ZlkpSOGD>
-
-#四.训练一个神经网络用于机器翻译
+# 四.训练一个神经网络用于机器翻译
+<pre>
 original_words = []
 with open('dictionary.txt', 'r') as f:
     dataset = []
@@ -149,9 +155,7 @@ input_size = 100
 output_size = 200
 hidden_size1 = 512
 #hidden_size2=256
-
-
-# 新建一个神经网络，包含一个隐含层
+#新建一个神经网络，包含一个隐含层
 model = nn.Sequential(nn.Linear(input_size, hidden_size1),
                       nn.ReLU(),
                       #nn.Dropout(p=0.1),
@@ -161,13 +165,13 @@ model = nn.Sequential(nn.Linear(input_size, hidden_size1),
                       nn.Linear(hidden_size1, output_size),
                     )
 
-# 构造损失函数
+#构造损失函数
 criterion = torch.nn.MSELoss()
 
-# 构造优化器
+#构造优化器
 optimizer = torch.optim.Adam(model.parameters(), lr = 0.0001,weight_decay=0.0001)
 
-# 总的循环周期
+#总的循环周期
 num_epoch =40
 
 
@@ -176,20 +180,20 @@ results = []
 for epoch in range(num_epoch):
     train_loss = []
     for data in train_data:
-        # 读入数据
+        #读入数据
         x = Variable(torch.FloatTensor(data[0])).unsqueeze(0)
         y = Variable(torch.FloatTensor(data[1])).unsqueeze(0)
         #清空梯度
         optimizer.zero_grad()
-        # 模型预测
+        #模型预测
         output = model(x)
         
-        # 反向传播算法训练
+        #反向传播算法训练
         loss = criterion(output, y)
         train_loss.append(loss.data.numpy()[0])
         loss.backward()
         optimizer.step()
-    # 在校验集上测试一下效果
+    #在校验集上测试一下效果
     valid_loss = []
     for data in valid_data:
         x = Variable(torch.FloatTensor(data[0])).unsqueeze(0)
@@ -239,7 +243,8 @@ for epoch in range(num_epoch):
 37轮，训练Loss: 5.66, 校验Loss: 6.78
 38轮，训练Loss: 5.63, 校验Loss: 6.78
 39轮，训练Loss: 5.61, 校验Loss: 6.78
-
+</pre>
+<pre>
 a = [i[0] for i in results]
 b = [i[1] for i in results]
 plt.plot(a)
@@ -248,10 +253,12 @@ plt.legend(['train loss','valid loss'])
 plt.xlabel('Epoch')
 plt.ylabel('Loss Function')
 plt.show()
+</pre>
 <http://thumbsnap.com/QRxnh9mH>
 
 # 在测试集上验证准确度
 # 检验标准有两个：一个是直接用预测的词和标准答案做全词匹配；另一个是做单字的匹配
+<pre>
 exact_same = 0  #全词匹配数量
 one_same = 0 #单字匹配数量
 results = []
@@ -278,3 +285,4 @@ print(results)
 精确匹配率：0.18
 一字匹配率：0.32
 [['花式', '配饰'], ['弗兰克', '约翰'], ['匈牙利', '法国'], ['挥手', '挥手'], ['快速', '快速'], ['拉伸', '外侧'], ['打破', '瓦解'], ['疯狂', '黑暗'], ['关键', '变量'], ['封闭', '走道'], ['说', '说'], ['驱动', '驱动'], ['诵经', '高喊'], ['克隆', '克隆'], ['事件', '体育比赛'], ['解决', '解决'], ['老虎', '野狼'], ['人', '人类'], ['欲言又止', '沮丧'], ['预算', '财政'], ['受', '痛苦'], ['潜伏', '黑影'], ['扔', '扔'], ['032', '腰围'], ['这些', '这些'], ['可怕', '真的'], ['企业', '服务'], ['遇到', '遇到'], ['费用', '支出'], ['床', '床'], ['抽搐', '慌乱'], ['确定性', '或者说'], ['零', '标记'], ['神话', '神话传说'], ['酒吧', '餐厅'], ['鼠标', '蜥蜴'], ['救出', '营救'], ['螨', '虫子'], ['沙球', '摇动'], ['纠察', '芙蓉桥'], ['决定', '决定'], ['客户', '客户'], ['悬崖', '山岭'], ['了', '的'], ['龙', '百兽'], ['画', '比赛'], ['发现', '观测'], ['狼狈', '惶恐'], ['大吃一惊', '诧异'], ['米', '米'], ['来', '去'], ['安全', '稳当'], ['盛宴', '晚餐'], ['核', '武器'], ['裸', '缝'], ['匆匆', '飞奔'], ['通常', '或者'], ['进行', '尽快'], ['想象', '真的'], ['劳伦斯', '约翰'], ['无聊', '无聊'], ['波兰', '波兰'], ['调侃', '嘲讽'], ['鼻', '耳部'], ['槽', '遥控器'], ['细', '精致'], ['妈妈', '我'], ['呼吸', '呼吸'], ['织物', '布料'], ['白痴', '傻子'], ['耐受', '排斥'], ['昨天', '真的'], ['女友', '丈夫'], ['喉咙', '嘴唇'], ['平方', '广场'], ['圆满', '解决'], ['按钮', '按钮'], ['旅行者', '旅行者'], ['恶心', '可怕'], ['颜色', '色彩'], ['地方', '这里'], ['挤', '拧'], ['等待', '确认'], ['冷笑', '讥讽'], ['扔', '扔'], ['大小', '体积'], ['乡村', '雅致'], ['防暴', '特警'], ['宝贝', '妈妈'], ['成功', '掌权'], ['温暖', '温热'], ['中断', '中断'], ['初步', '确定'], ['秸秆', '树枝'], ['后悔', '自责'], ['行星', '地球'], ['魔鬼', '老鹰'], ['巴伐利亚', '巴伐利亚'], ['500', '150'], ['效果', '影响'], ['阻挠', '阻止'], ['名称', '名字'], ['慢', '缓慢'], ['发生', '发生'], ['疯狂', '恐惧'], ['鱿鱼', '鱼'], ['扩大', '填充'], ['漂流', '翻滚'], ['威尔伯', '约翰'], ['推算', '轮回'], ['活跃', '颤动'], ['属于', '是'], ['缕缕', '亮光'], ['没有', '因为'], ['反抗', '镇压'], ['蔬菜', '蔬菜'], ['暂停', '等待'], ['电荷', '支付'], ['盖茨', '走道'], ['白痴', '那'], ['糖果', '饼干'], ['翻倍', '增加'], ['挣扎', '挣扎'], ['形式', '形式'], ['镜头', '扫射'], ['挥舞', '挥舞'], ['确定', '判断'], ['活动', '组织'], ['树桩', '竹片'], ['最后', '月'], ['物种', '物种'], ['秘书', '职员'], ['原因', '诱发'], ['菜', '果酱'], ['固体', '致密'], ['交谈', '不耐烦'], ['芝士', '乳酪'], ['捕获', '捕捉'], ['卡车', '卡车'], ['妈妈', '妈妈'], ['支持', '篡改'], ['阻塞', '防止'], ['弱', '弱'], ['收到', '收到'], ['是', '呀'], ['下垂', '脖子'], ['拒绝', '拒绝'], ['代码', '编码'], ['话题', '讨论'], ['元帅', '指挥'], ['嚎啕大哭', '大叫'], ['洗劫', '掠夺'], ['适合', '使用'], ['改变', '改变'], ['雅', '啊'], ['舒', '代王'], ['燧石', '毛毛虫'], ['箭', '刀'], ['冲', '奔向'], ['笼', '蜘蛛'], ['胡子', '头发'], ['标记', '锯齿'], ['异常', '明显'], ['舞蹈', '舞蹈'], ['打断', '中断'], ['柜', '办公室'], ['等待', '上车'], ['失望', '失望'], ['忘记', '忘记'], ['点', '黑点'], ['斗争', '抗争'], ['被', '因为'], ['而', '往往'], ['坐', '坐着'], ['价值', '收益'], ['切换', '重新启动'], ['一切', '我们'], ['疼痛', '疼痛'], ['尴尬', '害怕'], ['胶', '蜡'], ['购买', '购买'], ['什么', '所以'], ['公平', '公平合理'], ['送', '发送给'], ['油腻', '粘'], ['责备', '误伤'], ['使', '需要'], ['左', '起身'], ['奥拓', '竖琴'], ['好', '我'], ['已经', '啦'], ['剧烈', '懒散'], ['菠萝', '香草'], ['杀', '杀害'], ['毯', '毛巾'], ['可能性', '可能'], ['卍', '图案'], ['推理', '逻辑'], ['检索', '查找'], ['吸', '窗框'], ['马', '纯净'], ['干', '干燥'], ['打趣', '笑着'], ['苏格兰', '荷兰'], ['面具', '盔甲'], ['启动', '提手'], ['建', '建造'], ['基因', '小鼠'], ['锅', '饼'], ['管理员', '看守'], ['煮', '温热'], ['支持', '支持'], ['问', '告诉他'], ['灰', '灰'], ['表', '吧台'], ['甜蜜', '甜味'], ['过度', '导致'], ['题为', '》'], ['接缝', '缝'], ['等效', '相当于'], ['依赖', '依赖'], ['麻子', '剥落'], ['自', '自我'], ['林下', '树林'], ['走', '骑车'], ['穿着', '穿着'], ['避免', '避免'], ['移', '调整'], ['狗', '狗狗'], ['第一', '第一'], ['渗透', '渗'], ['风衣', '丝巾'], ['通常', '一般'], ['桩', '堆'], ['芙拉', '猴子'], ['广告', '1044'], ['激怒', '报复'], ['毗邻', '建有'], ['别墅', '度假村'], ['追求', '意志'], ['鬃毛', '头发'], ['看', '啊'], ['旁边', '不远处'], ['说', '说'], ['站', '站立'], ['衣柜', '壁橱'], ['应该', '就算'], ['做', '我'], ['保持', '保证'], ['极限', '上限'], ['受害者', '受害者'], ['威胁', '邪恶'], ['光', '白光'], ['船上', '船'], ['压力', '收缩'], ['服务', '服务']]
+</pre>
