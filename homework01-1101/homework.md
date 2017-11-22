@@ -91,8 +91,9 @@ for i, w in enumerate(cn_list):
     ax1.text(X_reduced[i, 0], X_reduced[i, 1], w, fontproperties = zhfont1, alpha = 1)
 for i, w in enumerate(en_list):
     ax2.text(Y_reduced[i, 0], Y_reduced[i, 1], w, alpha = 1)  
-![](http://upload-images.jianshu.io/upload_images/7539367-75f9223e86201eff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 </pre>
+![](http://upload-images.jianshu.io/upload_images/7539367-75f9223e86201eff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 <pre>
 #中文的科目列表
 cn_list = {'物理', '化学', '生物', '科学', '社会', '计算机', '历史'}
@@ -125,8 +126,9 @@ for i, w in enumerate(cn_list):
     ax1.text(X_reduced[i, 0], X_reduced[i, 1], w, fontproperties = zhfont1, alpha = 1)
 for i, w in enumerate(en_list):
     ax2.text(Y_reduced[i, 0], Y_reduced[i, 1], w, alpha = 1)
-![](http://upload-images.jianshu.io/upload_images/7539367-ddddce6ba4bca763.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 </pre>
+![](http://upload-images.jianshu.io/upload_images/7539367-ddddce6ba4bca763.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 # 四.训练一个神经网络用于机器翻译
 <pre>
