@@ -58,8 +58,9 @@ with open('glove.6B.100d.txt') as f:
         word_vectors_en[word] = vectors
         i += 1
 print(len(word_vectors_en))
-
+</pre>
 # 三 可视化。中文的一二三四五列表
+<pre>
 cn_list = {'一', '二', '三', '四', '五', '六', '七', '八', '九', '零'}
 #阿拉伯数字的12345列表
 #en_list = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}
@@ -91,9 +92,11 @@ for i, w in enumerate(cn_list):
 for i, w in enumerate(en_list):
     ax2.text(Y_reduced[i, 0], Y_reduced[i, 1], w, alpha = 1)  
 ![](http://upload-images.jianshu.io/upload_images/7539367-75f9223e86201eff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-# 中文的科目列表
+</pre>
+<pre>
+#中文的科目列表
 cn_list = {'物理', '化学', '生物', '科学', '社会', '计算机', '历史'}
-# 阿拉伯数字的12345列表
+#阿拉伯数字的12345列表
 #en_list = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}
 # 英文科目的列表
 en_list = {'physics', 'chemistry', 'biology', 'science', 'society', 'computer', 'history'}
@@ -111,7 +114,9 @@ en_vectors = np.array(en_vectors)
 X_reduced = PCA(n_components=2).fit_transform(cn_vectors)
 Y_reduced = PCA(n_components = 2).fit_transform(en_vectors)
 #plt.rcParams['font.sans-serif']=['Droid Sans Fallback']
-# 绘制所有单词向量的二维空间投影
+</pre>
+#绘制所有单词向量的二维空间投影
+<pre>
 f, (ax1, ax2) = plt.subplots(1, 2, figsize = (10, 8))
 ax1.plot(X_reduced[:, 0], X_reduced[:, 1], 'o')
 ax2.plot(Y_reduced[:, 0], Y_reduced[:, 1], 'o')
@@ -150,8 +155,9 @@ train_data = dataset[train_size:]
 valid_data = dataset[train_size // 2 : train_size]
 test_data = dataset[: train_size // 2]
 test_words = original_words[: train_size // 2]
-# 开始训练一个多层神经网络，将一个100维度的英文向量映射为200维度的中文词向量，隐含层节点为256
-
+</pre>
+#开始训练一个多层神经网络，将一个100维度的英文向量映射为200维度的中文词向量，隐含层节点为256
+<pre>
 input_size = 100
 output_size = 200
 hidden_size1 = 512
@@ -175,7 +181,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr = 0.0001,weight_decay=0.0001
 #总的循环周期
 num_epoch =40
 
-
+</pre>
 #开始训练500次，每次对所有的数据都做循环
 <pre>
 results = []
