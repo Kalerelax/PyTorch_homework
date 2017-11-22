@@ -89,7 +89,7 @@ for i, w in enumerate(cn_list):
     ax1.text(X_reduced[i, 0], X_reduced[i, 1], w, fontproperties = zhfont1, alpha = 1)
 for i, w in enumerate(en_list):
     ax2.text(Y_reduced[i, 0], Y_reduced[i, 1], w, alpha = 1)  
-![](http://upload-images.jianshu.io/upload_images/7539367-514b6aa6cae3fdb3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](链接1)
 # 中文的科目列表
 cn_list = {'物理', '化学', '生物', '科学', '社会', '计算机', '历史'}
 # 阿拉伯数字的12345列表
@@ -119,7 +119,7 @@ for i, w in enumerate(cn_list):
     ax1.text(X_reduced[i, 0], X_reduced[i, 1], w, fontproperties = zhfont1, alpha = 1)
 for i, w in enumerate(en_list):
     ax2.text(Y_reduced[i, 0], Y_reduced[i, 1], w, alpha = 1)
-![](http://upload-images.jianshu.io/upload_images/7539367-514b6aa6cae3fdb3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](链接2)
 </pre>
 
 # 四.训练一个神经网络用于机器翻译
@@ -254,7 +254,7 @@ plt.xlabel('Epoch')
 plt.ylabel('Loss Function')
 plt.show()
 </pre>
-<http://thumbsnap.com/QRxnh9mH>
+<链接3>
 
 # 在测试集上验证准确度
 # 检验标准有两个：一个是直接用预测的词和标准答案做全词匹配；另一个是做单字的匹配
